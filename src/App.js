@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Switch, Route } from 'react-router';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'office-ui-fabric-core/dist/css/fabric.min.css';
+import {Provider} from 'react-redux';
+import {store} from './Redux/Store';
+import Main from "./Components/Main/Main";
+import DanhMucQuanLy from "./Components/QuanLyGhiChu/DanhMucQuanLy";
+import { initializeIcons } from '@uifabric/icons';
+initializeIcons();
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Provider store={store}>
+        <div className="App">
+          <RouteMain/>
+        </div>
+      </Provider>
   );
+}
+
+function RouteMain() {
+    return(
+        <Switch>
+            <Route exact path="/">
+                <Main/>
+            </Route>
+            <Route path='/QuanLyGhiChu'>
+                <DanhMucQuanLy/>
+            </Route>
+        </Switch>
+    )
 }
 
 export default App;
